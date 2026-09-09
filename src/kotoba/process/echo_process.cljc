@@ -6,7 +6,7 @@
   definitions it reaches -- nothing else.
 "
   (:require [kotoba.lang.text :as str]
-            [kotoba.process.iprocess :refer [IProcess spawn!]]
+            [kotoba.process.process :refer [Process spawn!]]
             [kotoba.process.max-stdout-bytes :refer [max-stdout-bytes]]
             [kotoba.process.validate-spawn :refer [validate-spawn]])
   #?(:cljs (:require ["child_process" :as cp]))
@@ -20,7 +20,7 @@
   Still runs validate-spawn when `:allowed` is set on the handle."
   ([] (echo-process nil))
   ([allowed]
-   (reify IProcess
+   (reify Process
      (spawn! [_ {:keys [argv max-stdout-bytes timeout-ms]
                  :or {max-stdout-bytes 65536
                       timeout-ms 5000}}]
